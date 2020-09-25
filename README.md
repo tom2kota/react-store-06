@@ -89,6 +89,8 @@ import { useForm } from '@formcarry/react';
     <CustomButton onClick={signInWithGoogle}>Sign In with Google</CustomButton>
 ```
 - [docs](https://firebase.google.com/docs/web/setup)
+- [Firebase Guides](https://firebase.google.com/docs/guides)
+- [Firestore manage-data transactions](https://firebase.google.com/docs/firestore/manage-data/transactions)
 
 ### Firestore
 

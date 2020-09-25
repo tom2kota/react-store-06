@@ -2,7 +2,6 @@ import firebase from "firebase/app";
 import 'firebase/firestore';
 import 'firebase/auth';
 
-
 const firebaseConfig = {
     apiKey: "AIzaSyDFrtyZ1g-BCvZN5t734kjPx3vFNvVoZh8",
     authDomain: "r-store-2020.firebaseapp.com",
@@ -19,8 +18,16 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
     const userRef = firestore.doc(`users/${userAuth.uid}`)
     const snapShot = await userRef.get()
+    const collectionRef = firestore.collection('users')
+    const collectionSnapShot = await collectionRef.get()
 
-    console.log(snapShot)
+    console.log('...........................')
+    console.log('userRef: ', userRef)
+    console.log('snapShot: ', snapShot)
+    console.log('collectionRef: ', collectionRef)
+    console.log('collectionSnapShot: ', collectionSnapShot)
+    console.log({collection: collectionSnapShot.docs.map(doc => doc.data())})
+    console.log('...........................')
 
     if (!snapShot.exists) {
         const {displayName, email} = userAuth;
