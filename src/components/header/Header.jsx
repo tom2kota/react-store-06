@@ -5,9 +5,9 @@ import {createStructuredSelector} from "reselect";
 import {connect} from 'react-redux';
 import CartIcon from "../cart-icon/CartIcon";
 import CartDropdown from "../cart-dropdown/CartDropdown";
-import imgLogo from '../../images/logo192.png'
 import {selectCartHidden} from "../../redux/cart/cartSelectors";
 import {selectCurrentUser} from "../../redux/user/userSelectors";
+import imgLogo from './static/media/logo192.png'
 
 const Header = ({currentUser, hidden}) => (
     <HeaderContainer>
