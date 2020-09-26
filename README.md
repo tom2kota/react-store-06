@@ -5,6 +5,48 @@ E-commerce project DEMO:
 
 ---------------
 
+## Export Shop data to Firebase
+
+``` 
+// App.jsx
+import {addCollectionAndDocuments, auth, createUserProfileDocument} from "../../firebase/firebase.utils";
+import {selectCollectionsForPreview} from "../../redux/shop/shopSelectors";
+
+componentDidMount() {
+    const {setCurrentUser, collectionsArray} = this.props;
+    await addCollectionAndDocuments('collections', collectionsArray.map(({title, items}) => ({
+        title,
+        items
+    })))
+}
+
+const mapStateToProps = createStructuredSelector({
+    currentUser: selectCurrentUser,
+    collectionsArray: selectCollectionsForPreview
+})
+```
+
+``` 
+// src/firebase/firebase.utils.js
+
+export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+    const collectionRef = firestore.collection(collectionKey)
+    const batch = firestore.batch()
+
+    objectsToAdd.forEach(obj => {
+            const newDocRef = collectionRef.doc()
+            console.log('newDocRef: ', newDocRef)
+            batch.set(newDocRef, obj)
+        })
+
+    console.log('collectionRef: ', collectionRef)
+
+    return await batch.commit()
+}
+```
+
+---------------
+
 ## [Stripe](https://stripe.com)
 
 - Go to [Dashboard](https://dashboard.stripe.com/test/developers)
