@@ -5,6 +5,42 @@ E-commerce project DEMO:
 
 ---------------
 
+## Import Shop data from Firebase
+
+``` 
+// ShopPage
+
+class ShopPage extends Component {
+    unsubscribeFromSnapshot = null;
+    componentDidMount() {
+        const collectionRef = firestore.collection('collections')
+        collectionRef.onSnapshot(
+            async snapshot => convertCollectionsSnapshotToMap(snapshot)
+        )
+    }
+...
+```
+
+``` 
+// firebase.utils
+
+export const convertCollectionsSnapshotToMap = collections => {
+    const transformedCollection = collections.docs.map(doc => {
+            const {title, items} = doc.data()
+            return ({
+                routeName: encodeURI(title.toLowerCase()),
+                id: doc.id,
+                title,
+                items
+            })
+        }
+    )
+    console.log(transformedCollection)
+}
+s```
+
+---------------
+
 ## Export Shop data to Firebase
 
 ``` 
