@@ -37,7 +37,7 @@ export const convertCollectionsSnapshotToMap = collections => {
     )
     console.log(transformedCollection)
 }
-s```
+```
 
 ---------------
 
