@@ -1,8 +1,7 @@
-import {SHOP_DATA} from "./shopData";
 import {UPDATE_COLLECTIONS} from "./shopTypes";
 
 const INITIAL_STATE = {
-    collections: SHOP_DATA
+    collections: []
 }
 
 export const shopReducer = (state = INITIAL_STATE, action) => {
