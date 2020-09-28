@@ -6,6 +6,8 @@ import {convertCollectionsSnapshotToMap, firestore} from "../../firebase/firebas
 import {connect} from "react-redux";
 import {updateCollections} from "../../redux/shop/shopActions";
 import {WithSpinner} from "../../components/with-spinner/withSpinner";
+import {createStructuredSelector} from "reselect";
+import {selectIsCollectionsLoaded} from "../../redux/shop/shopSelectors";
 import './ShopPage.scss';
 
 const CollectionsOverviewWithSpinner = WithSpinner(CollectionsOverview)
@@ -31,25 +33,28 @@ class ShopPage extends Component {
     }
 
     render() {
-        const {match} = this.props;
+        const {match, isCollectionsLoaded} = this.props;
         const {loading} = this.state;
-        // console.log('state: ', this.state);
-        // console.log('props: ', this.props);
+
         return (
             <div className='shop-page'>
                 <Route exact path={`${match.path}`}
                        render={props => <CollectionsOverviewWithSpinner isLoading={loading} {...props}/>}
                 />
                 <Route path={`${match.path}/:collectionId`}
-                       render={props => <CollectionPageWithSpinner isLoading={loading} {...props}/>}
+                       render={props => <CollectionPageWithSpinner isLoading={!isCollectionsLoaded} {...props}/>}
                 />
             </div>
         )
     }
 }
 
+const mapStateToProps = createStructuredSelector({
+    isCollectionsLoaded: selectIsCollectionsLoaded
+})
+
 const mapDispatchToProps = dispatch => ({
     updateCollections: collectionsMap => dispatch(updateCollections(collectionsMap))
 })
 
-export default connect(null, mapDispatchToProps)(ShopPage)
+export default connect(mapStateToProps, mapDispatchToProps)(ShopPage)
