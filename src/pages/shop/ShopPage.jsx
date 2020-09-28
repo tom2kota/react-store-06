@@ -5,8 +5,8 @@ import CollectionPage from "../collection/CollectionPage";
 import {convertCollectionsSnapshotToMap, firestore} from "../../firebase/firebase.utils";
 import {connect} from "react-redux";
 import {updateCollections} from "../../redux/shop/shopActions";
-import './ShopPage.scss';
 import {WithSpinner} from "../../components/with-spinner/withSpinner";
+import './ShopPage.scss';
 
 const CollectionsOverviewWithSpinner = WithSpinner(CollectionsOverview)
 const CollectionPageWithSpinner = WithSpinner(CollectionPage)
