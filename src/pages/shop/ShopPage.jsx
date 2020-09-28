@@ -33,7 +33,8 @@ class ShopPage extends Component {
     render() {
         const {match} = this.props;
         const {loading} = this.state;
-
+        // console.log('state: ', this.state);
+        // console.log('props: ', this.props);
         return (
             <div className='shop-page'>
                 <Route exact path={`${match.path}`}
